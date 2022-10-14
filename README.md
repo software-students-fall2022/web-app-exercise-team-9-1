@@ -9,8 +9,8 @@ To create a web application for amusement park riders, employees, and directors,
 
 ## User stories
 
-See instructions. Delete this line and place a link to the user stories here.
+[Link to user stories](https://github.com/software-students-fall2022/web-app-exercise-team-9-1/issues)
 
 ## Task boards
 
-See instructions. Delete this line and place a link to the task boards here.
+[Link to task boards](https://github.com/orgs/software-students-fall2022/projects/8)
