@@ -5,7 +5,7 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-See instructions. Delete this line and place the Product Vision Statement here.
+To create a web application for amusement park riders, employees, and directors, so that riders can understand the layout of the park, rides that have soared in popularity, rides that need maintenance work, and adapt their amusement park schedules to accommodate their personal desires, as well as providing valuable feedback to employees and directors for ways to improve the park itself.
 
 ## User stories
 
