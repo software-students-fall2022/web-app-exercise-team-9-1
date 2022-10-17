@@ -18,12 +18,26 @@ app.secret_key = "secret key"
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+@staticmethod
+def get_current_user():
+    if current_user.is_authenticated:
+        return User(id = current_user.id, username = current_user.username)
+    return None
+
+
+
+import profile
+import opening
+
+
+
 @app.route('/')
 def home():
     if current_user.is_authenticated: 
         return redirect(url_for('profile'))
-    return render_template('index.html') # render the hone template
+    return render_template('opening.html',opec=0, msg="")
 
+ 
  
 @app.route('/test', methods = ['POST'])
 def show_home():
@@ -31,46 +45,24 @@ def show_home():
 
 @login_manager.user_loader
 def load_user(id):
-    user = db.Users.find_one({"_id": id})
+    user = db.Users.find_one({"_id": id })
     if not user:
         return None
     return User(id = user['_id'], username = user['Username'])
 
 
-@app.route('/login', methods = ['GET', 'POST'])
-def login():
+def check_authentification_in_app():
+    if not current_user.is_authenticated: 
+        return redirect(url_for('home'))
 
-    if current_user.is_authenticated:
-        return redirect(url_for('profile'))
-   
-    name = request.form.get('username')
-    password = request.form.get('password')
-    
-   
-    user = db.Users.find_one({"Username": name})
-    #print("Password: ", password, "Correct Password: ", user['Password'])
-    if user and user['Password'] == password:
-        print("user found")
-        user_obj = User(id = user['_id'], username = user['Username'])
-        login_user(user_obj)
-        flash("Success")
-        next_page = request.args.get('next')
-        if next_page:
-            return redirect(next_page)
-        return redirect(url_for('profile'))
-    else:
-        flash("Invalid username or password")
-        
-    return render_template('test.html', title = 'Sign In', form = request.form)
-    
 
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
 
-@app.route('/logout')
+
+
+
+@app.route('/logout', methods = ['GET', 'POST'])
 def logout():
     logout_user()
-    return redirect(url_for('/'))
+    return redirect(url_for('home'))
 
 app.run(debug = True)

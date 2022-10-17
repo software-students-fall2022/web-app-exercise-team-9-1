@@ -10,7 +10,7 @@ from flask import Flask
 class User(UserMixin):
     def __init__(self, id, username):
         self.username = username
-        self.id = id
+        self.id = id.__str__()
     
     @staticmethod
     def is_authenticated():
