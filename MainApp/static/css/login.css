@@ -9,52 +9,48 @@ html {
     display: grid;
     justify-items: center;
     align-items: center;
-    background-color: #bdafaf;
-    
+    background-color: #595959;
+    background-image: url('../images/bg_login_2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: 80%;
+    background-blend-mode: multiply;
   }
 
 h1#login-header {
     color: aliceblue;
     font-size: -webkit-xxx-large;
+    text-align: center;
+}
+
+h2#login-subheader {
+    color: aliceblue;
+    text-align: center;    
 }
   
-  #main-holder {
-    width: 50%;
-    height: 70%;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 7px;
-    box-shadow: 0px 0px 5px 2px black;
-  }
+
   
   #login-error-msg-holder {
     width: 100%;
-    height: 100%;
+    height: 0%;
     display: grid;
     justify-items: center;
     align-items: center;
-  }
+}
   
-  #login-error-msg {
-    width: 23%;
+#login-error-msg {
+    width: 34%;
     text-align: center;
-    margin: 0;
-    padding: 5px;
+    padding: 15px;
     font-size: 12px;
     font-weight: bold;
     color: #8a0000;
     border: 1px solid #8a0000;
     background-color: #e58f8f;
     opacity: 0;
-  }
+}
   
-  #error-msg-second-line {
-    display: block;
-  }
-  
-  #login-form {
+#login-form {
     align-self: flex-start;
     display: grid;
     justify-items: center;
@@ -69,7 +65,9 @@ h1#login-header {
     border: none;
     border-bottom: 1px solid #3a3a3a;
     margin-bottom: 10px;
-    border-radius: 3px;
+    border-radius: 5px;
+    border: 2px solid #000000;
+    width: 120%;
     outline: none;
     padding: 0px 0px 5px 5px;
   }
@@ -77,12 +75,15 @@ h1#login-header {
   #login-form-submit {
     width: 100%;
     padding: 7px;
-    border: none;
-    border-radius: 5px;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
     color: white;
     font-weight: bold;
     background-color: #3a3a3a;
     cursor: pointer;
-    outline: none;
+    border-color: whitesmoke;
     margin: 3px;
   }
+
+
+
