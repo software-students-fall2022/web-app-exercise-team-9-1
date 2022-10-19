@@ -7,20 +7,24 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>MainPageAdmin</title>
+        <title>SearchPageUser</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../static/css/main_page.css">
     </head>
     <body>
         <div class="top-bar">
-            <h3 class="title">Home</h3>
+            <form method="GET", action="/main_page">
+                <input class="back_btn" type="submit" value="" style="float:left;" />
+            </form>
+
+            <h3 class="title">Search Result</h3>
             <form method="GET", action="/profile">
                 <input class="profile_btn" type="submit" value="" />
             </form>
 
-            <form method="GET", action="/add_ride">
-                <input class="add_ride_btn" type='submit' value="" />
+            <form method="GET", action="/favorite">
+                <input class="favorite_btn" type='submit' value="" />
             </form>
             
         </div>
@@ -43,44 +47,45 @@
               <a href="#" onclick="filterSelection('type_Others')">Others</a>
             </div>
           </div>
-        {% for rideID in rideIDs %}
-            <div class="rides-preview type_{{ride_type[loop.index0]}}" style="background-image: {{bg_names[loop.index0]}};">
-                <form action="/aaa" method="GET" id="form_submit_{{rideID}}">
-                    <div class="section1">
-                        <div class="pink-box" onclick="document.forms['form_submit_{{rideID}}'].submit();">
-                            <div class="rides-preview-title ">
-                                <h1 style="margin-top: 10px; margin-bottom: 0px;color: #ffffff;font-size:8vw;">{{ride_names[loop.index0]}}</h1>
-                                <h4 style="margin-top: 0px; margin-bottom: 0px;color: #ffffff;">{{ride_type[loop.index0]}}</h4>
-                            </div>
-                            <div>
-                                <p class="description">{{ride_desc[loop.index0]}}</p>
-                            </div>
-                            <div>
-                                <p class="wait_time">
-                                    
-                                    Status: <b><span class="medium">{{maintence_name[loop.index0]}}</span></b>
+          {% for rideID in rideIDs %}
+          <div class="rides-preview type_{{ride_type[loop.index0]}}" style="background-image: {{bg_names[loop.index0]}};">
+              <form action="/aaa" method="GET" id="form_submit_{{rideID}}">
+                  <div class="section1">
+                      <div class="pink-box" onclick="document.forms['form_submit_{{rideID}}'].submit();">
+                          <div class="rides-preview-title ">
+                              <h1 style="margin-top: 10px; margin-bottom: 0px;color: #ffffff;font-size:8vw;">{{ride_names[loop.index0]}}</h1>
+                              <h4 style="margin-top: 0px; margin-bottom: 0px;color: #ffffff;">{{ride_type[loop.index0]}}</h4>
+                          </div>
+                          <div>
+                              <p class="description">{{ride_desc[loop.index0]}}</p>
+                          </div>
+                          <div>
+                              <p class="wait_time">
+                                  
+                                  Status: <b><span class="medium">{{maintence_name[loop.index0]}}</span></b>
 
-                                </p>
-                            </div>
-                            <div style="display:flex;">
-                                <div>
-                                    <p class="hight_requirement">Height Req: {{height_req[loop.index0]}}cm</p>
-                                </div>    
-                                {% set rating_count=ratings[loop.index0]%}
-                                <!-- create a row of stars that represent the rating -->
-                                <div class="rides-rating" style="float:right; flex:1;">
-                                    {% for i in range(0,rating_count) %}
-                                        <img src="../static/images/star.png" alt="" width="20px" height="20px" />
-                                    {% endfor %}
-                
-                                </div>
-                            </div>
-                        </div>
-            
-                    </div>
-                </form>
-            </div>
-        {% endfor %}
+                              </p>
+                          </div>
+                          <div style="display:flex;">
+                              <div>
+                                  <p class="hight_requirement">Height Req: {{height_req[loop.index0]}}cm</p>
+                              </div>    
+                              {% set rating_count=ratings[loop.index0]%}
+                              <!-- create a row of stars that represent the rating -->
+                              <div class="rides-rating" style="float:right; flex:1;">
+                                  {% for i in range(0,rating_count) %}
+                                      <img src="../static/images/star.png" alt="" width="20px" height="20px" />
+                                  {% endfor %}
+              
+                              </div>
+                          </div>
+                      </div>
+          
+                  </div>
+              </form>
+          </div>
+      {% endfor %}
+
 
         <script>
             filterSelection("all")

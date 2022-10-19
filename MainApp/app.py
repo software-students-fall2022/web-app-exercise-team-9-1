@@ -6,7 +6,6 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from user import User
 
 
-
 connection = pymongo.MongoClient("mongodb+srv://admin:12345678!!@cluster0.yfbfkgx.mongodb.net/?retryWrites=true&w=majority")
 db = connection["Amusement_Park_Rides"]
 
