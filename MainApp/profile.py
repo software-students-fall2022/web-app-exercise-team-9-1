@@ -8,7 +8,7 @@ from user import User
 from app import app, get_current_user
 
 
-@app.route('/profile')
+@app.route('/profile', methods = ['GET'])
 def profile():
     user = get_current_user()
     return render_template('profile.html', username=user.username)

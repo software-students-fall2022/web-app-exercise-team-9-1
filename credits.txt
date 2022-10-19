@@ -1,0 +1,3 @@
+Login page HTML & CSS : https://medium.com/swlh/how-to-create-your-first-login-page-with-html-css-and-javascript-602dd71144f1
+Main Page CSS: https://www.w3schools.com/howto/howto_css_icon_bar.asp, https://www.w3schools.com/howto/howto_css_search_button.asp
+Filter: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_filter_elements
