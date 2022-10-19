@@ -10,7 +10,7 @@ from app import app, get_current_user, db
 @app.route('/sign_in', methods = ['POST'])
 def opening_page():
     if current_user.is_authenticated:
-        return redirect(url_for('profile'))
+        return redirect(url_for('main_page'))
     
     name = request.form.get('username')
     password = request.form.get('password')
@@ -23,7 +23,7 @@ def opening_page():
             print("user found")
             user_obj = User(id = user['_id'], username = user['Username'])
             login_user(user_obj)
-            return redirect(url_for('profile'))
+            return redirect(url_for('main_page'))
         else:
             return render_template('opening.html', opac=1, msg="Invalid username and/or password")
     else:
@@ -44,7 +44,7 @@ def opening_page():
             user_obj = User(id = user['_id'], username = user['Username'])
            
             login_user(user_obj)
-            return redirect(url_for('profile'))
+            return redirect(url_for('main_page'))
             
 
 

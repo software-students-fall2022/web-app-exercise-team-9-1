@@ -25,16 +25,19 @@ def get_current_user():
     return None
 
 
-
+def check_authentification_in_app():
+    if not current_user.is_authenticated: 
+        return redirect(url_for('home'))
+    
 import profile
 import opening
-
+import main_page
 
 
 @app.route('/')
 def home():
     if current_user.is_authenticated: 
-        return redirect(url_for('profile'))
+        return redirect(url_for('main_page'))
     return render_template('opening.html',opec=0, msg="")
 
  
@@ -51,9 +54,7 @@ def load_user(id):
     return User(id = user['_id'], username = user['Username'])
 
 
-def check_authentification_in_app():
-    if not current_user.is_authenticated: 
-        return redirect(url_for('home'))
+
 
 
 
