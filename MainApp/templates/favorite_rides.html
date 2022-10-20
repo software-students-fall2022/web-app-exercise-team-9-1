@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>SearchPageUser</title>
+        <title>FavoriteRides</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../static/css/main_page.css">
@@ -18,23 +18,13 @@
                 <input class="back_btn" type="submit" value="" style="float:left;" />
             </form>
 
-            <h3 class="title">Search Result</h3>
+            <h3 class="title">Liked Rides</h3>
             <form method="GET", action="/profile">
                 <input class="profile_btn" type="submit" value="" />
             </form>
-
-            <form method="GET", action="/favorite">
-                <input class="favorite_btn" type='submit' value="" />
-            </form>
             
         </div>
-        <div>
-            <form class="search" action="/search" method="GET">
-                <input type="text" placeholder="Search (name, description).." name="search_text">
-                <button type="submit" class="submit_btn"><i class="fa fa-search">Search</i></button>
-            </form>
-           
-        </div>
+       
         <div class="dropdown">
             <button class="dropbtn">Filter</button>
             <div class="dropdown-content">
@@ -48,12 +38,21 @@
             </div>
           </div>
           {% for rideID in rideIDs %}
+          <form id="form_like_{{rideID}}" action="/remove_favorite" method="POST"></form>
+
           <div class="rides-preview type_{{ride_type[loop.index0]}}" style="background-image: {{bg_names[loop.index0]}};">
               <form action="/aaa" method="GET" id="form_submit_{{rideID}}">
                   <div class="section1">
                       <div class="pink-box" onclick="document.forms['form_submit_{{rideID}}'].submit();">
-                          <div class="rides-preview-title ">
-                              <h1 style="margin-top: 10px; margin-bottom: 0px;color: #ffffff;font-size:8vw;">{{ride_names[loop.index0]}}</h1>
+                          <div class="rides-preview-title">
+                              <div style="margin-top: 10px; margin-bottom: 0px;color: #ffffff;display:flex; justify-content: space-between;">
+                                <h1 style = "font-size:5vw;margin-bottom: 0px;margin-top: 0px;">{{ride_names[loop.index0]}}</h1>
+                                <input type="hidden" name="id" value="{{rideID}}" form="form_like_{{rideID}}">
+                                <input class="remove_like" name="btn" value="" type="submit"  form="form_like_{{rideID}}" style="
+                                padding-top: 30px;
+                               " />
+                                
+                              </div>
                               <h4 style="margin-top: 0px; margin-bottom: 0px;color: #ffffff;">{{ride_type[loop.index0]}}</h4>
                           </div>
                           <div>

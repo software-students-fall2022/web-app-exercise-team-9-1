@@ -49,7 +49,28 @@ def main_page():
     return render_rides_list(rides, 'main_page.html', 'main_page_admin.html')
     
     
+@app.route('/favorite', methods = ['GET'])
+def favorite_rides():
+    check_authentification_in_app()
+    user = get_current_user()
+    user = db.Users.find_one({"_id": user.id})
+    favorite_ride_ids = user['FavoriteRides']
+    rides = db.Rides.find({"_id": {"$in": favorite_ride_ids}})
+    return render_rides_list(rides, 'favorite_rides.html', 'favorite_rides.html')
 
+@app.route('/remove_favorite', methods = ['POST'])
+def remove_favorite():
+    check_authentification_in_app()
+    user = get_current_user()
+    
+    removed_id = request.form.get('id')
+    print("Removed ID: ", removed_id)
+    
+    db.Users.update(
+        { "_id": user.id },
+        { "$pull":  {'FavoriteRides': removed_id }})
+
+    return favorite_rides()
 
 
 @app.route('/search', methods = ['GET', 'POST'])

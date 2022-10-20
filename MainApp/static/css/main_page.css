@@ -55,7 +55,25 @@ body {
   background-repeat: no-repeat;
   background-size: 50px;
   background-position-x: center;
+  display:flexbox;
 }
+
+.remove_like{
+  float: right;
+  width: 15%;
+  height: 15%;
+  text-align: center;
+  margin-left: 2px;
+  transition: all 0.3s ease;
+  background-image: url(../images/remove_icon.png);
+  background-repeat: no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-color: transparent;
+  border: none;
+ 
+}
+
 
 .top-bar form input.favorite_btn{
   background-image: url('../images/favorite_icon.png');
