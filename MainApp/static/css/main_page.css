@@ -51,7 +51,7 @@ body {
 }
 
 .top-bar form input.profile_btn{
-  background-image: url('../images/profile_icon.png');
+  background-image: url('../images/logout_icon.png');
   background-repeat: no-repeat;
   background-size: 50px;
   background-position-x: center;
