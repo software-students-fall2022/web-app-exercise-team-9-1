@@ -45,8 +45,9 @@
           </div>
         {% for rideID in rideIDs %}
             <div class="rides-preview type_{{ride_type[loop.index0]}}" style="background-image: {{bg_names[loop.index0]}};">
-                <form action="/aaa" method="GET" id="form_submit_{{rideID}}">
+                <form action="/rides_desc" method="GET" id="form_submit_{{rideID}}">
                     <div class="section1">
+                        <input type="hidden" name="id" value="{{rideID}}" form="form_submit_{{rideID}}">
                         <div class="pink-box" onclick="document.forms['form_submit_{{rideID}}'].submit();">
                             <div class="rides-preview-title ">
                                 <h1 style="margin-top: 10px; margin-bottom: 0px;color: #ffffff;font-size:8vw;">{{ride_names[loop.index0]}}</h1>

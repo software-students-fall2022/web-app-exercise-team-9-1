@@ -72,6 +72,62 @@ def remove_favorite():
 
     return favorite_rides()
 
+@app.route('/choose_favorite_main_page', methods = ['POST'])
+def choose_favorite_main():
+    check_authentification_in_app()
+    user = get_current_user()
+    
+    add_id = request.form.get('id')
+    print("Removed ID: ", add_id)
+    
+    db.Users.update(
+        { "_id": user.id },
+        { "$push":  {'FavoriteRides': add_id }})
+
+    return main_page()
+
+@app.route('/remove_favorite_main_page', methods = ['POST'])
+def remove_favorite_main():
+    check_authentification_in_app()
+    user = get_current_user()
+    
+    removed_id = request.form.get('id')
+    print("Removed ID: ", removed_id)
+    
+    db.Users.update(
+        { "_id": user.id },
+        { "$pull":  {'FavoriteRides': removed_id }})
+
+    return main_page()
+
+@app.route('/choose_favorite_search_page', methods = ['POST'])
+def choose_favorite_search():
+    check_authentification_in_app()
+    user = get_current_user()
+    search_string = request.form.get('search_string')
+    add_id = request.form.get('id')
+    
+    
+    db.Users.update(
+        { "_id": user.id },
+        { "$push":  {'FavoriteRides': add_id }})
+    return search_page(search_string)
+    
+
+@app.route('/remove_favorite_search_page', methods = ['POST'])
+def remove_favorite_search():
+    check_authentification_in_app()
+    user = get_current_user()
+    search_string = request.form.get('search_string')
+    removed_id = request.form.get('id')
+   
+    
+    db.Users.update(
+        { "_id": user.id },
+        { "$pull":  {'FavoriteRides': removed_id }})
+    return search_page(search_string)
+    
+
 
 @app.route('/search', methods = ['GET', 'POST'])
 def search():
@@ -79,13 +135,17 @@ def search():
     check_authentification_in_app()
     search_string = request.args.get('search_text')
     print("Search String: ", search_string)
+    
+    return search_page(search_string)
+
+def search_page(search_string):
     rides = db.Rides.find({"$or": [{ 'Name' : { '$regex' : search_string, '$options' : 'i' }},
                                    { 'Description' : { '$regex' : search_string, '$options' : 'i' }}]})
-    return render_rides_list(rides, 'search_page_user.html', 'search_page_admin.html')
-
-
+    return render_rides_list(rides, 'search_page_user.html', 'search_page_admin.html', search_string)
+ 
+ 
     
-def render_rides_list(rides, page_name_user,page_name_admin):
+def render_rides_list(rides, page_name_user,page_name_admin, search_string = ""):
     user = get_current_user()
     user = db.Users.find_one({"_id": user.id})
     
@@ -99,7 +159,7 @@ def render_rides_list(rides, page_name_user,page_name_admin):
     maintence=[]
     ride_type_bg_name = []
     maintence_name = []
-    
+    liked=[]
     for rideID in rideIDs:
         ride = db.Rides.find_one({"_id": rideID})
         ride_names.append(ride['Name'])
@@ -112,7 +172,8 @@ def render_rides_list(rides, page_name_user,page_name_admin):
         this_ratings = ride['Popularity']
         total_ratings_count = len(this_ratings)
         total_rating=0
-        print("RideID: ", rideID, "Ratings: ")
+        liked.append(rideID in user['FavoriteRides'])
+        print("Liked: ", rideID in user['FavoriteRides'])
         for rating in this_ratings:
             print(rating['Rating'])
             total_rating += rating['Rating']
@@ -122,7 +183,7 @@ def render_rides_list(rides, page_name_user,page_name_admin):
         ride_type_bg_name.append(get_ride_bg_name(ride['RideType']))
     
     if(user['UserType'] == 0):
-        return render_template(page_name_user, rideIDs=rideIDs, ride_names=ride_names, ride_type=ride_type, ride_desc=ride_desc, wait_time=wait_times, height_req=height_req, ratings=ratings, maintence=maintence,bg_names=ride_type_bg_name)
+        return render_template(page_name_user, rideIDs=rideIDs, ride_names=ride_names, ride_type=ride_type, ride_desc=ride_desc, wait_time=wait_times, height_req=height_req, ratings=ratings, maintence=maintence,bg_names=ride_type_bg_name, liked = liked, search_string = search_string)
     
-    return render_template(page_name_admin, rideIDs=rideIDs, ride_names=ride_names, ride_type=ride_type, ride_desc=ride_desc, wait_time=wait_times, height_req=height_req, ratings=ratings, maintence=maintence,bg_names=ride_type_bg_name, maintence_name=maintence_name)
+    return render_template(page_name_admin, rideIDs=rideIDs, ride_names=ride_names, ride_type=ride_type, ride_desc=ride_desc, wait_time=wait_times, height_req=height_req, ratings=ratings, maintence=maintence,bg_names=ride_type_bg_name, maintence_name=maintence_name,search_string = search_string)
     
