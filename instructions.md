@@ -28,18 +28,18 @@ The application must consist of at least 6 different screens.
 
 Teams must work following an "agile" methodology. While there are exist variety of ways teams often implement so-called agile development, in our case, this means specifically the following:
 
-### Discord channel
+### Discord channel (completed)
 
 Teams must create a public channel in the course Discord server to use for team communication
 
 - teams are expected to self-organize and create and join the channel themselves
 - name the Discord channel after your team, e.g. `team-7`.
 
-### Product vision statement
+### Product vision statement (completed)
 
 Teams must write a product vision statement for their web application and place it in the `README.md` file. This should be one-sentence description of the project.
 
-### User stories
+### User stories (completed)
 
 To begin, teams must develop a set of user stories that define the product they are building.
 
@@ -65,7 +65,7 @@ A link to the Projects page should be included in the `README.md` file.
 
 ![simple task board](images/simple-task-board.png)
 
-### Daily standups
+### Daily standups (near completion)
 
 Teams must hold 3 or more "daily" standup meetings per week.
 
