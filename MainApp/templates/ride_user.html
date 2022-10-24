@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ride_Page</title>
+    <link rel="stylesheet" href="../static/css/main_page.css">
+</head>
+
+<body>
+    <div class="top-bar">
+        <h3 class="title">{{ride_name}}</h3>
+        <form method="GET" , action='main_page'>
+            <input class="back_btn" type='submit' value="" />
+        </form>
+    </div>
+    <div class="desc-container">
+        <!-- <div class="rides-preview type_{{ride_type}}" style="background-image: {{ride_bg}}">
+        <div class="section1">
+            <div class="pink-box" onclick="document.forms['form_submit_{{rideID}}'].submit();">
+                <div class="rides-preview-title ">
+                    <div
+                        style="margin-top: 0px; margin-bottom: 0px;color: #ffffff;display:flex; justify-content: space-between;">
+                        <h1 style="margin-top: 10px; margin-bottom: 0px;color: #ffffff;font-size:8vw;">{{ride_name}}
+                        </h1> -->
+        <h1 style="color: white">Description</h1>
+        <p style="text-align: center">{{ride_desc}}</p>
+        <h2 style="color: white">Rider Comments</h2>
+        <table>
+            <tr>
+                <th>User</th>
+                <th>Feedback</th>
+            </tr>
+            {% for feedbackItem in feedbacks %}
+            <tr>
+                <td>{{feedbackItem['User_ID']}}</td>
+                <td>{{feedbackItem['Feedback']}}</td>
+            </tr>
+            <!-- <div style="color: white">User {{feedbackItem['User_ID']}}: {{feedbackItem['Feedback']}}</div> -->
+            {% endfor %}
+        </table>
+        <br>
+        <button class="editBtn" onclick="clickMe()">Add Comment</button>
+        <br>
+        <div class="commentContainer">
+            <form id="popup" class="hide" action='/rides_desc' method="POST">
+                <textarea type="text" name="comment" class="commentBox" cols="40" rows="3"></textarea>
+                <br><br><br>
+                <input name="ride_id" type="hidden" value="{{ ride_id }}">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        
+    </div>
+
+    <script>
+        function clickMe() {
+            var text = document.getElementById("popup");
+            text.classList.toggle("hide");
+            text.classList.toggle("show");
+        }
+    </script>
+</body>
+
+</html>
