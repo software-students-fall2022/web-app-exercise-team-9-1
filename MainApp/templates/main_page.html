@@ -45,11 +45,32 @@
           </div>
         {% for rideID in rideIDs %}
             <div class="rides-preview type_{{ride_type[loop.index0]}}" style="background-image: {{bg_names[loop.index0]}};">
-                <form action="/aaa" method="GET" id="form_submit_{{rideID}}">
+                <form id="form_like_{{rideID}}" action="/choose_favorite_main_page" method="POST"></form>
+                <form id="form_unlike_{{rideID}}" action="/remove_favorite_main_page" method="POST"></form>
+                <form action="/rides_desc" method="GET" id="form_submit_{{rideID}}">
                     <div class="section1">
+
+                        <input type="hidden" name="id" value="{{rideID}}" form="form_submit_{{rideID}}">
                         <div class="pink-box" onclick="document.forms['form_submit_{{rideID}}'].submit();">
                             <div class="rides-preview-title ">
-                                <h1 style="margin-top: 10px; margin-bottom: 0px;color: #ffffff;font-size:8vw;">{{ride_names[loop.index0]}}</h1>
+                                <div style="margin-top: 0px; margin-bottom: 0px;color: #ffffff;display:flex; justify-content: space-between;">
+                                    <h1 style="margin-top: 10px; margin-bottom: 0px;color: #ffffff;font-size:8vw;">{{ride_names[loop.index0]}}</h1>
+                                    {%if liked[loop.index0] == False%}
+                                        <input type="hidden" name="id" value="{{rideID}}" form="form_like_{{rideID}}">
+                                        <input class="like_button_not_liked" name="btn" value="" type="submit"  form="form_like_{{rideID}}" style="
+                                        padding-top: 50px;
+                                        margin-top: 20px;" />
+                                    {%else%}
+                                        <input type="hidden" name="id" value="{{rideID}}" form="form_unlike_{{rideID}}">
+                                        <input class="like_button_liked" name="btn" value="" type="submit"  form="form_unlike_{{rideID}}" style="
+                                        padding-top: 50px;
+                                        margin-top: 20px;" />
+                                    {%endif%}
+
+                                   
+                                  </div>
+
+                               
                                 <h4 style="margin-top: 0px; margin-bottom: 0px;color: #ffffff;">{{ride_type[loop.index0]}}</h4>
                             </div>
                             <div>

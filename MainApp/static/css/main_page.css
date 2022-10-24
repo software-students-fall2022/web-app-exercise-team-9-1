@@ -74,6 +74,53 @@ body {
  
 }
 
+.like_button_not_liked{
+  float: right;
+  width: 15%;
+  height: 15%;
+  text-align: center;
+  margin-left: 2px;
+  transition: all 0.3s ease;
+  background-image: url(../images/favorite_icon_white.png);
+  background-repeat: no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-color: transparent;
+  border: none;
+ 
+}
+
+.like_button_liked{
+  float: right;
+  width: 15%;
+  height: 15%;
+  text-align: center;
+  margin-left: 2px;
+  transition: all 0.3s ease;
+  background-image: url(../images/favorite_icon_filled_white.png);
+  background-repeat: no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-color: transparent;
+  border: none;
+ 
+}
+
+.edit_button{
+  float: right;
+  width: 15%;
+  height: 15%;
+  text-align: center;
+  margin-left: 2px;
+  transition: all 0.3s ease;
+  background-image: url(../images/edit_icon.png);
+  background-repeat: no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-color: transparent;
+  border: none;
+ 
+}
 
 .top-bar form input.favorite_btn{
   background-image: url('../images/favorite_icon.png');

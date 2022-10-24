@@ -45,11 +45,21 @@
           </div>
         {% for rideID in rideIDs %}
             <div class="rides-preview type_{{ride_type[loop.index0]}}" style="background-image: {{bg_names[loop.index0]}};">
-                <form action="/aaa" method="GET" id="form_submit_{{rideID}}">
+                <form id="form_edit_{{rideID}}" action="/edit_ride" method="GET"></form>
+                <form action="/rides_desc" method="GET" id="form_submit_{{rideID}}">
                     <div class="section1">
+                        <input type="hidden" name="id" value="{{rideID}}" form="form_submit_{{rideID}}">
                         <div class="pink-box" onclick="document.forms['form_submit_{{rideID}}'].submit();">
                             <div class="rides-preview-title ">
-                                <h1 style="margin-top: 10px; margin-bottom: 0px;color: #ffffff;font-size:8vw;">{{ride_names[loop.index0]}}</h1>
+                                <div style="margin-top: 0px; margin-bottom: 0px;color: #ffffff;display:flex; justify-content: space-between;">
+                                    <h1 style="margin-top: 10px; margin-bottom: 0px;color: #ffffff;font-size:8vw;">{{ride_names[loop.index0]}}</h1>
+                                   
+                                        <input type="hidden" name="id" value="{{rideID}}" form="form_edit_{{rideID}}">
+                                        <input class="edit_button" name="btn" value="" type="submit"  form="form_edit_{{rideID}}" style="
+                                        padding-top: 50px;
+                                        margin-top: 20px;" />
+                                   
+                                </div>
                                 <h4 style="margin-top: 0px; margin-bottom: 0px;color: #ffffff;">{{ride_type[loop.index0]}}</h4>
                             </div>
                             <div>
