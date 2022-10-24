@@ -32,17 +32,18 @@ import profile
 import opening
 import main_page
 
-
 @app.route('/')
 def home():
     if current_user.is_authenticated: 
         return redirect(url_for('main_page'))
     return render_template('opening.html',opec=0, msg="")
 
-@app.route('/edit_ride')
+@app.route('/edit_ride', methods = ['GET'])
 def edit_ride():
     print(request.args.get('id'))
     return render_template('opening.html',opec=0, msg="")
+ 
+ 
  
 @app.route('/test', methods = ['POST'])
 def show_home():

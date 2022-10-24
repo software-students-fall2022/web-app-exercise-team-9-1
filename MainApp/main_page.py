@@ -177,7 +177,12 @@ def render_rides_list(rides, page_name_user,page_name_admin, search_string = "")
         for rating in this_ratings:
             print(rating['Rating'])
             total_rating += rating['Rating']
-        ratings.append(round(total_rating/total_ratings_count))
+            
+        if(total_ratings_count>0):
+             ratings.append(round(total_rating/total_ratings_count))
+        else:
+             ratings.append(0)
+             
         maintence.append(ride['Maintenance'])
         maintence_name.append(get_maintenance_name(ride['Maintenance']))
         ride_type_bg_name.append(get_ride_bg_name(ride['RideType']))
