@@ -14,6 +14,7 @@ from app import app, get_current_user, db, check_authentification_in_app
 
 @app.route('/rides_desc', methods=['GET', 'POST'])
 def rides_desc():
+    check_authentification_in_app()
     if request.method == 'GET':
         ride_id = request.args.get('id')
         rideObj = db.Rides.find_one({'_id': ride_id})
@@ -25,29 +26,7 @@ def rides_desc():
         print('id from post', ride_id)
         rideObj = db.Rides.find_one({'_id': ride_id})
         print('from post', rideObj)
-    # if request.method == 'GET':
-    #     check_authentification_in_app()
-    #     user = get_current_user()
-    #     user = db.Users.find_one({"_id": user.id})
-    #     ride_desc = rideObj['Description']
-    #     ride_bg = get_ride_bg_name(ride_id)
-    #     ride_type = rideObj['RideType']
-    #     ride_name = rideObj['Name']
-    #     feedbacks = rideObj['Feedbacks']
-    #     print(feedbacks)
-    #     if(user['UserType']==0):
-    #         return render_template('ride_user.html', ride_name=ride_name, ride_id=ride_id, ride_desc=ride_desc, ride_bg=ride_bg, ride_type=ride_type, feedbacks=feedbacks)
-    #     else:
-    #         return render_template('ride_admin.html', ride_name=ride_name, ride_id=ride_id, ride_desc=ride_desc, ride_bg=ride_bg, ride_type=ride_type, feedbacks=feedbacks)
-    # elif request.method == 'POST':
-    #     check_authentification_in_app()
-    #     comment = request.form.get('comment')
-    #     currUser = get_current_user()
-    #     currUserId = currUser.get_id()
-    #     rideObj = db.Rides.find_one_and_update({'_id': ride_id }, {'$push': {'Feedbacks': {currUserId: comment}}})
-    #     return redirect('rides_desc')
 
-    check_authentification_in_app()
     user = get_current_user()
     user = db.Users.find_one({"_id": user.id})
     ride_desc = rideObj['Description']
@@ -62,7 +41,10 @@ def rides_desc():
         currUserId = currUser.get_id()
         db.Rides.find_one_and_update({'_id': ride_id}, {'$push': {'Feedbacks': {
                                      'User_ID': currUserId, 'Feedback': comment}}})
-    if (user['UserType'] == 0):
-        return render_template('ride_user.html', ride_name=ride_name, ride_id=ride_id, ride_desc=ride_desc, ride_bg=ride_bg, ride_type=ride_type, feedbacks=feedbacks)
+    if request.method == 'GET':
+        if (user['UserType'] == 0):
+            return render_template('ride_user.html', ride_name=ride_name, ride_id=ride_id, ride_desc=ride_desc, ride_bg=ride_bg, ride_type=ride_type, feedbacks=feedbacks)
+        else:
+            return render_template('ride_admin.html', ride_name=ride_name, ride_id=ride_id, ride_desc=ride_desc, ride_bg=ride_bg, ride_type=ride_type, feedbacks=feedbacks)
     else:
-        return render_template('ride_admin.html', ride_name=ride_name, ride_id=ride_id, ride_desc=ride_desc, ride_bg=ride_bg, ride_type=ride_type, feedbacks=feedbacks)
+        return redirect(url_for('main_page'))

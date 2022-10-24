@@ -42,7 +42,10 @@
             {% endfor %}
         </table>
         <br>
-        <button class="editBtn" onclick="clickMe()">Add Comment</button>
+        <form action="/" method="POST" class="Btn">
+            <button class="Btn" name="favorite" value="">Add Favorite</button>
+        </form>
+        <button class="Btn" onclick="clickMe()">Add Comment</button>
         <br>
         <div class="commentContainer">
             <form id="popup" class="hide" action='/rides_desc' method="POST">
