@@ -53,4 +53,4 @@ To create a web application for amusement park riders, employees, and directors,
 
 ## Task boards
 
-[Link to task boards](https://github.com/orgs/software-students-fall2022/projects/8)
+[Link to task boards](https://github.com/software-students-fall2022/web-app-exercise-team-9-1/projects?query=is%3Aopen)

@@ -35,8 +35,8 @@
             </tr>
             {% for feedbackItem in feedbacks %}
             <tr>
-                <td style="color: white">{{feedbackItem['User_ID']}}</td>
-                <td style="color: white">{{feedbackItem['Feedback']}}</td>
+                <td style="color: white">{{feedbackItem.name}}</td>
+                <td style="color: white">{{feedbackItem.feedback}}</td>
             </tr>
             <!-- <div style="color: white">User {{feedbackItem['User_ID']}}: {{feedbackItem['Feedback']}}</div> -->
             {% endfor %}

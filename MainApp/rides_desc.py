@@ -76,6 +76,16 @@ def remove_favorite_rides_desc():
     return show_rides_desc(ride_id)
 
 
+
+class feedbackItem:
+    def __init__(self, feedback, user_id, db):
+        self.feedback = feedback
+        user = db.Users.find_one({'_id': user_id})
+        if user is not None:
+             self.name = db.Users.find_one({'_id': user_id})['Name']
+        else:
+            self.name = user_id
+    
 def show_rides_desc(ride_id):
     rideObj = db.Rides.find_one({'_id': ride_id})
     user = get_current_user()
@@ -86,8 +96,13 @@ def show_rides_desc(ride_id):
     ride_type = rideObj['RideType']
     ride_name = rideObj['Name']
     feedbacks = rideObj['Feedbacks']
+    feedbackItems = []
     liked = ride_id in user['FavoriteRides']
     rate =  db.Rides.find_one({'_id': ride_id}, {'Popularity': {'$elemMatch': {'User_ID': user['_id']}}})
+    
+    for feedback in feedbacks:
+        feedbackItems.append(feedbackItem(feedback['Feedback'], feedback['User_ID'], db))
+    
     if(rate == None):
         rate = 0
     else:
@@ -95,6 +110,6 @@ def show_rides_desc(ride_id):
         
     if (user['UserType'] == 0):
         
-        return render_template('ride_user.html', ride_name=ride_name, ride_id=ride_id, ride_desc=ride_desc, ride_bg=ride_bg, ride_type=ride_type, feedbacks=feedbacks, liked= liked, rate=rate)
+        return render_template('ride_user.html', ride_name=ride_name, ride_id=ride_id, ride_desc=ride_desc, ride_bg=ride_bg, ride_type=ride_type, feedbacks=feedbackItems, liked= liked, rate=rate)
     else:
-        return render_template('ride_admin.html', ride_name=ride_name, ride_id=ride_id, ride_desc=ride_desc, ride_bg=ride_bg, ride_type=ride_type, feedbacks=feedbacks)
+        return render_template('ride_admin.html', ride_name=ride_name, ride_id=ride_id, ride_desc=ride_desc, ride_bg=ride_bg, ride_type=ride_type, feedbacks=feedbackItems)
