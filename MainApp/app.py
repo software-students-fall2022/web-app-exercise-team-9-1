@@ -39,7 +39,10 @@ def home():
         return redirect(url_for('main_page'))
     return render_template('opening.html',opec=0, msg="")
 
- 
+@app.route('/edit_ride')
+def edit_ride():
+    print(request.args.get('id'))
+    return render_template('opening.html',opec=0, msg="")
  
 @app.route('/test', methods = ['POST'])
 def show_home():
