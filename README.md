@@ -37,6 +37,12 @@ To launch the app:
    ```
    python3 -m flask run --host=127.0.0.1 --port=10000
    ```
+
+## How to Login as an Admin
+To use the App for the Admin version:
+1. Go to Login Page
+2. Login with username "admin" and password "admin"
+
 ## Product vision statement
 
 To create a web application for amusement park riders, employees, and directors, so that riders can understand the layout of the park, rides that have soared in popularity, rides that need maintenance work, and adapt their amusement park schedules to accommodate their personal desires, as well as providing valuable feedback to employees and directors for ways to improve the park itself.
