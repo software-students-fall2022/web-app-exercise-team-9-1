@@ -31,7 +31,7 @@ def check_authentification_in_app():
 import profile
 import opening
 import main_page
-
+import rides_desc
 @app.route('/')
 def home():
     if current_user.is_authenticated: 
