@@ -66,7 +66,7 @@ def remove_favorite():
     removed_id = request.form.get('id')
     print("Removed ID: ", removed_id)
     
-    db.Users.update(
+    db.Users.update_one(
         { "_id": user.id },
         { "$pull":  {'FavoriteRides': removed_id }})
 
@@ -80,7 +80,7 @@ def choose_favorite_main():
     add_id = request.form.get('id')
     print("Removed ID: ", add_id)
     
-    db.Users.update(
+    db.Users.update_one(
         { "_id": user.id },
         { "$push":  {'FavoriteRides': add_id }})
 
@@ -94,7 +94,7 @@ def remove_favorite_main():
     removed_id = request.form.get('id')
     print("Removed ID: ", removed_id)
     
-    db.Users.update(
+    db.Users.update_one(
         { "_id": user.id },
         { "$pull":  {'FavoriteRides': removed_id }})
 
@@ -108,7 +108,7 @@ def choose_favorite_search():
     add_id = request.form.get('id')
     
     
-    db.Users.update(
+    db.Users.update_one(
         { "_id": user.id },
         { "$push":  {'FavoriteRides': add_id }})
     return search_page(search_string)
@@ -122,7 +122,7 @@ def remove_favorite_search():
     removed_id = request.form.get('id')
    
     
-    db.Users.update(
+    db.Users.update_one(
         { "_id": user.id },
         { "$pull":  {'FavoriteRides': removed_id }})
     return search_page(search_string)
