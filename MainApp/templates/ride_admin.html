@@ -41,7 +41,18 @@
             <!-- <div style="color: white">User {{feedbackItem['User_ID']}}: {{feedbackItem['Feedback']}}</div> -->
             {% endfor %}
         </table>
+
+        <div class="commentContainer">
+            <div class="rate">
+                <form id="popup" action='/rides_delete' method="POST">
+                    <input type="hidden" name="id" value="{{ride_id}}"> 
+                </br>
+                    <input type="submit" class="delete_ride" value="Delete this Ride" >
+                </form>
+            </div>
+        </div>
     </div>
+   
     <!--
     <form method="GET", action="/add_ride">
             <br>

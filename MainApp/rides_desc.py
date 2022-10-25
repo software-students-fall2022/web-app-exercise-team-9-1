@@ -51,7 +51,18 @@ def rides_desc_comment():
     db.Rides.find_one_and_update({'_id': ride_id}, {'$push': {'Feedbacks': {
                                     'User_ID': currUserId, 'Feedback': comment}}})
     return redirect(url_for('rides_desc', id = ride_id))
-        
+ 
+ 
+@app.route('/rides_delete', methods=['POST'])
+def delete_ride():
+    check_authentification_in_app()
+   
+    ride_id = request.form.get('id')
+    
+    db.Rides.delete_one({'_id': ride_id})
+    return redirect(url_for('home'))
+
+       
 @app.route('/add_favorite_desc', methods=['POST'])
 def add_favorite_rides_desc():
     print("add_favorite_rides_desc")
