@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>FavoriteRides</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/css/main_page.css">
+    </head>
+    <body>
+        <div class="top-bar">
+            <form method="GET", action="/main_page">
+                <input class="back_btn" type="submit" value="" style="float:left;" />
+            </form>
+
+            <h3 class="title">Liked Rides</h3>
+            <form method="GET", action="/logout">
+                <input class="profile_btn" type="submit" value="" />
+            </form>
+            
+        </div>
+       
+        <div class="dropdown">
+            <button class="dropbtn">Filter</button>
+            <div class="dropdown-content">
+              <a href="#" onclick="filterSelection('all')">All</a>
+              <a href="#" onclick="filterSelection('type_Slow-paced')">Slow-paced</a>
+              <a href="#" onclick="filterSelection('type_Moderate')">Moderate</a>
+              <a href="#" onclick="filterSelection('type_Intensive')">Intensive</a>
+              <a href="#" onclick="filterSelection('type_Interactive')">Interactive</a>
+              <a href="#" onclick="filterSelection('type_Sightseeing')">Sightseeing</a>
+              <a href="#" onclick="filterSelection('type_Others')">Others</a>
+            </div>
+          </div>
+          {% for rideID in rideIDs %}
+          <form id="form_like_{{rideID}}" action="/remove_favorite" method="POST"></form>
+
+          <div class="rides-preview type_{{ride_type[loop.index0]}}" style="background-image: {{bg_names[loop.index0]}};">
+              <form action="/rides_desc" method="GET" id="form_submit_{{rideID}}">
+                  <div class="section1">
+                    <input type="hidden" name="id" value="{{rideID}}" form="form_submit_{{rideID}}">
+                      <div class="pink-box" onclick="document.forms['form_submit_{{rideID}}'].submit();">
+                          <div class="rides-preview-title">
+                              <div style="margin-top: 10px; margin-bottom: 0px;color: #ffffff;display:flex; justify-content: space-between;">
+                                <h1 style = "font-size:5vw;margin-bottom: 0px;margin-top: 0px;">{{ride_names[loop.index0]}}</h1>
+                                <input type="hidden" name="id" value="{{rideID}}" form="form_like_{{rideID}}">
+                                <input class="remove_like" name="btn" value="" type="submit"  form="form_like_{{rideID}}" style="
+                                padding-top: 30px;
+                               " />
+                                
+                              </div>
+                              <h4 style="margin-top: 0px; margin-bottom: 0px;color: #ffffff;">{{ride_type[loop.index0]}}</h4>
+                          </div>
+                          <div>
+                              <p class="description">{{ride_desc[loop.index0]}}</p>
+                          </div>
+                          <div>
+                            <p class="wait_time">
+                                {%if maintence[loop.index0] < 2%}
+                                  Wait Time: <b><span class="bigger">{{wait_time[loop.index0]}}</span>mins</b>
+                                {%else%}
+                                <b><span class="bigger">Closed</span></b>
+                                {%endif%}
+                               
+                            </p>
+                          </div>
+                          <div style="display:flex;">
+                              <div>
+                                  <p class="hight_requirement">Height Req: {{height_req[loop.index0]}}cm</p>
+                              </div>    
+                              {% set rating_count=ratings[loop.index0]%}
+                              <!-- create a row of stars that represent the rating -->
+                              <div class="rides-rating" style="float:right; flex:1;">
+                                  {% for i in range(0,rating_count) %}
+                                      <img src="../static/images/star.png" alt="" width="20px" height="20px" />
+                                  {% endfor %}
+              
+                              </div>
+                          </div>
+                      </div>
+          
+                  </div>
+              </form>
+          </div>
+      {% endfor %}
+
+
+        <script>
+            filterSelection("all")
+            function filterSelection(c) {
+              var x, i;
+              x = document.getElementsByClassName("rides-preview");
+              if (c == "all") c = "";
+              for (i = 0; i < x.length; i++) {
+                RemoveClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) AddClass(x[i], "show");
+              }
+            }
+            
+            function AddClass(element, name) {
+              var i, arr1, arr2;
+              arr1 = element.className.split(" ");
+              arr2 = name.split(" ");
+              for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+              }
+            }
+            
+            function RemoveClass(element, name) {
+              var i, arr1, arr2;
+              arr1 = element.className.split(" ");
+              arr2 = name.split(" ");
+              for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                  arr1.splice(arr1.indexOf(arr2[i]), 1);     
+                }
+              }
+              element.className = arr1.join(" ");
+            }
+            </script>
+
+    </body>
+</html>
